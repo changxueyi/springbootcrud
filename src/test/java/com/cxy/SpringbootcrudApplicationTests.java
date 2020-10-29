@@ -4,11 +4,15 @@ import com.cxy.dao.UserMapper;
 import com.cxy.domin.PageReq;
 import com.cxy.domin.People;
 import com.cxy.domin.User;
+import com.cxy.service.schedule.SimpleJob;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.quartz.*;
+import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.sql.DataSource;
@@ -24,6 +28,9 @@ class SpringbootcrudApplicationTests {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private Scheduler scheduler;
 
 
     @Test
@@ -74,8 +81,36 @@ class SpringbootcrudApplicationTests {
         people.setId(1);
         people.setAge("22");
         people.setSex("男");
-        BeanUtils.copyProperties(people,user);
+        BeanUtils.copyProperties(people, user);
         System.out.println(user.toString());
+    }
+
+    @Test
+    public void test6() throws SchedulerException, InterruptedException {
+        Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
+        //定义一个Trigger ，触发条件类
+        Trigger trigger = TriggerBuilder.newTrigger()
+                //创建触发器,trigger
+                .withIdentity("trigger1", "group1")
+                .startNow() //一旦加入schedule ，立即生效,即开始时间
+                .withSchedule(SimpleScheduleBuilder.simpleSchedule()
+                        // 2秒执行1次，共重复一次.withIntervalInSeconds(2).withRepeatCount(1))
+                        .withIntervalInSeconds(2).repeatForever())
+                //.endAt(new Date(System.currentTimeMillis()+10*1000)) // 10s后停止
+                //.endAt(new GregorianCalendar(2020,10,29,23,39,10).getTime())
+                .build();
+        //withRepeatCount 循环几次
+        //withIntervalInSeconds 多少秒一次
+        JobDetail jobDetail = JobBuilder.newJob(SimpleJob.class)
+                .withIdentity("job04", "group04")
+                .usingJobData("data", "hello word")
+                .build();
+        scheduler.scheduleJob(jobDetail, trigger);
+        scheduler.start();
+
+        //关闭调度器
+        Thread.sleep(10000);
+        scheduler.shutdown();
     }
 
 }
