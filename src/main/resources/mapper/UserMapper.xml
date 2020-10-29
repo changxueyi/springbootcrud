@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cxy.dao.UserMapper">
+    <!--<insert id="insert" parameterType="com.cxy.domin.User" >
+    insert into user (id,name,age,birthday)
+    values (#{id,jdbcType=INT}, #{name,jdbcType=VARCHAR}, #{age,jdbcType=VARCHAR}, #{birthday,jdbcType=TIMESTAMP})
+  </insert>-->
+
+    <insert id="insert" parameterType="com.cxy.domin.User">
+        insert into user values (#{id},#{name},#{age},#{birthday})
+    </insert>
+
+
+    <select id="selectId" resultType="com.cxy.domin.User">
+        select * from user where id = #{id}
+    </select>
+
+    <select id="selectAll" resultType="com.cxy.domin.User">
+        select * from user
+    </select>
+</mapper>
