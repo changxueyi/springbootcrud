@@ -17,8 +17,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @SpringBootTest
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -61,9 +64,12 @@ class SpringbootcrudApplicationTests {
     @Test
     public void test03() {
         User user = new User();
-        user.setAge("22");
-        user.setName("tetst1");
-        user.setBirthday(new Date());
+        user.setId(12);
+        user.setAge("1");
+        user.setName("京东数字科技");
+        Calendar c = Calendar.getInstance();
+        //c.add(Calendar.SECOND,-3600);
+        user.setBirthday(c.getTime());
         Integer result = userMapper.insert(user);
         System.out.println(result);
     }
@@ -85,6 +91,12 @@ class SpringbootcrudApplicationTests {
         System.out.println(user.toString());
     }
 
+    /**
+     * 测试成功
+     *
+     * @throws SchedulerException
+     * @throws InterruptedException
+     */
     @Test
     public void test6() throws SchedulerException, InterruptedException {
         Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
@@ -111,6 +123,17 @@ class SpringbootcrudApplicationTests {
         //关闭调度器
         Thread.sleep(10000);
         scheduler.shutdown();
+    }
+
+    @Test
+    public void test7() {
+        Map<String,Object> map = new HashMap<>();
+        Calendar c = Calendar.getInstance();
+        System.out.println(c);
+        System.out.println("********************");
+        c.add(Calendar.SECOND,-3600);
+        map.put("endTime",c.getTime());
+        System.out.println(map.get("endTime").toString());
     }
 
 }
