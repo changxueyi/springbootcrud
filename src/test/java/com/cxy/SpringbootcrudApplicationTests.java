@@ -183,9 +183,10 @@ class SpringbootcrudApplicationTests {
         user.setBirthday(new Date());
         user.setName("可口可乐");
         Integer result = userService.insert(user);
+        /**
+         * CXY
+         */
         System.out.println(result);
-
-
     }
 
 
