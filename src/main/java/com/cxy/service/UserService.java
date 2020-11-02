@@ -10,4 +10,5 @@ import com.cxy.domin.User;
  */
 public interface UserService {
     User getUser(Integer id);
+    int insert(User user);
 }

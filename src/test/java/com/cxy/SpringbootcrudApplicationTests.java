@@ -1,9 +1,9 @@
 package com.cxy;
 
 import com.cxy.dao.UserMapper;
-import com.cxy.domin.PageReq;
 import com.cxy.domin.People;
 import com.cxy.domin.User;
+import com.cxy.service.UserService;
 import com.cxy.service.schedule.SimpleJob;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -12,8 +12,10 @@ import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.relational.core.sql.In;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
@@ -34,6 +36,9 @@ class SpringbootcrudApplicationTests {
 
     @Autowired
     private Scheduler scheduler;
+
+    @Autowired
+    private UserService userService;
 
 
     @Test
@@ -127,13 +132,61 @@ class SpringbootcrudApplicationTests {
 
     @Test
     public void test7() {
-        Map<String,Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
         Calendar c = Calendar.getInstance();
         System.out.println(c);
         System.out.println("********************");
-        c.add(Calendar.SECOND,-3600);
-        map.put("endTime",c.getTime());
+        c.add(Calendar.SECOND, -3600);
+        map.put("endTime", c.getTime());
         System.out.println(map.get("endTime").toString());
     }
+
+    @Test
+    public void test8() {
+        Integer result = userMapper.delete(7);
+        System.out.println(result);
+    }
+
+    /**
+     * 测试分库分表的后缀信息
+     */
+    @Test
+    public void test09() {
+        //0 ->_0000
+        //1 ->_0001
+        int idx = 1;
+        //第一个的bai4表示右对齐且占4个字符位置，0表示空位补du0；
+        String tbIndex = String.format("_%04d", idx);
+        System.out.println(tbIndex);
+    }
+
+    @Test
+    public void test10() {
+        User user = new User();
+        user.setName("京东物流");
+        //     user.setId(15);
+        user.setBirthday(new Date());
+        user.setAge("11");
+        Integer result = userMapper.insert(user);
+        System.out.println(result);
+    }
+
+    @Test
+    public void test11() {
+        //事务的测试,下面的语句会打印空指针
+       /* String result = null;
+        System.out.println(result.toString());*/
+
+        //测试的代码中，插入可口可乐执行成功，但是后面的打印失败，所以整体回滚
+        User user = new User();
+        user.setAge("123");
+        user.setBirthday(new Date());
+        user.setName("可口可乐");
+        Integer result = userService.insert(user);
+        System.out.println(result);
+
+
+    }
+
 
 }

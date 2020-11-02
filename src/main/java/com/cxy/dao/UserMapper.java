@@ -15,7 +15,13 @@ import java.util.List;
  */
 public interface UserMapper {
     int insert(User user);
+
+    int insert2(User user);
+
     User selectId(Integer id);
+
+
+    int delete(Integer id);
 
     List<User> selectAll();
 }

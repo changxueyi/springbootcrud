@@ -7,7 +7,23 @@
   </insert>-->
 
     <insert id="insert" parameterType="com.cxy.domin.User">
-        insert into user2 values (#{id},#{name},#{age},#{birthday})
+        insert into user values (#{id},#{name},#{age},#{birthday})
+    </insert>
+
+    <insert id="insert2" parameterType="com.cxy.domin.User">
+        insert into user values
+        <if test="id != null and id != ''">
+            and id=#{id}
+        </if>
+        <if test="name != null and name != ''">
+            and name=#{name}
+        </if>
+        <if test="age != null and age != ''">
+            and age=#{age}
+        </if>
+        <if test="birthday != null and birthday != ''">
+            and birthday=#{birthday}
+        </if>
     </insert>
 
 
@@ -18,4 +34,8 @@
     <select id="selectAll" resultType="com.cxy.domin.User">
         select * from user
     </select>
+
+    <delete id="delete" >
+        delete from USER where id= #{id}
+    </delete>
 </mapper>
