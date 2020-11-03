@@ -46,8 +46,8 @@ public class CacheUtil {
         }
     }
 
-    public static Integer getCacheTime(CacheTimeIndex i){
-        switch (i.t){
+    public static Integer getCacheTime(CacheTimeIndex i) {
+        switch (i.t) {
             case 1:
                 return CACHE_TIME_MONTH.intValue();
             case 2:

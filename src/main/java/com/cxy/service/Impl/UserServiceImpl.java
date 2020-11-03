@@ -1,10 +1,8 @@
 package com.cxy.service.Impl;
 
-import com.cxy.common.res.Result;
 import com.cxy.dao.UserMapper;
 import com.cxy.domin.User;
 import com.cxy.service.UserService;
-import com.sun.source.tree.BreakTree;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
