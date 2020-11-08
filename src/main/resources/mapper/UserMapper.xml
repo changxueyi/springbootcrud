@@ -35,6 +35,12 @@
         select * from user
     </select>
 
+    <select id="selectAll1" resultType="com.cxy.domin.User" parameterType="map">
+        <![CDATA[
+        select * from user where birthday < #{endTime}
+        ]]>
+    </select>
+
     <delete id="delete" >
         delete from USER where id= #{id}
     </delete>

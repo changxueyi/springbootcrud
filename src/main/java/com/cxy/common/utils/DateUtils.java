@@ -12,6 +12,34 @@ import java.util.concurrent.TimeUnit;
  * @Date 2020/10/28 13:47
  */
 public class DateUtils {
+    public final static String DEFAULT_DATE_PATTERN = "yyyy-MM-dd";
+    public final static String DEFAULT_TIME_PATTERN = "HH:mm:ss";
+    public final static String DEFAULT_DATETIME_PATTERN = DEFAULT_DATE_PATTERN + " " + DEFAULT_TIME_PATTERN;
+    /**
+     * <p>Title: getCurrentDate</p>
+     * <p>Description: 时间字符串转换成Date类型输出</p>
+     *
+     * @return
+     * @throws ParseException
+     */
+    public static Date getDateFromStr(String formatDateStr, String formatter) {
+        //logger.debug("时间字符串转换成Date类型输出，参数为{}", formatDateStr);
+        //
+        if (null == formatDateStr || "".equals(formatDateStr)) {
+            return null;
+        }
+        if (null == formatter || "".equals(formatter)) {
+            formatter = DEFAULT_DATETIME_PATTERN;
+        }
+        Date date = null;
+        try {
+            date = new SimpleDateFormat(formatter).parse(formatDateStr);
+        } catch (ParseException e) {
+           // logger.error("日期类型转换错误，入参[{}]，不能转为{}格式的日期。", formatDateStr, formatter, e);
+        }
+
+        return date;
+    }
     //时间戳转Date
     public static String dateForDate(Long time) {
         //// 10位的秒级别的时间戳
@@ -52,7 +80,11 @@ public class DateUtils {
         /*System.out.println(System.currentTimeMillis());
         System.out.println(fun2());*/
         //测试fun3
-        System.out.println(fun3());
+        //System.out.println(fun3());
+        String reachTime = "2020-11-5";
+        Date result = UtilDateHelper.getDateFromStr(reachTime, "yyyy-MM-dd");
+        System.out.println(new SimpleDateFormat("yyyy-MM-dd").format(result));
+
     }
 
 

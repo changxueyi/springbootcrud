@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.data.relational.core.sql.In;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName UserMapper
@@ -19,6 +20,8 @@ public interface UserMapper {
     int insert2(User user);
 
     User selectId(Integer id);
+
+    List<User> selectAll1(Map map);
 
 
     int delete(Integer id);
