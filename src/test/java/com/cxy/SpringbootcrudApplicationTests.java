@@ -407,9 +407,39 @@ class SpringbootcrudApplicationTests {
                 "\n\r 返回结果 res={}", f.format(x), f.format(y), res);
     }
 
+    /**
+     * 测试下：date.after(date)
+     */
     @Test
     public void test28() {
-
+        Date date = new Date();
+        Calendar c = Calendar.getInstance();
+        c.add(Calendar.HOUR, -1);
+        //String result = System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(30L) + "";
+        Boolean aa = date.after(c.getTime());//2020-11-08 23:04:38
+        System.out.println(date.getTime());//2020-11-08 22:04:38
+        System.out.println(c.getTime().getTime());
+        System.out.println("***********");
+        System.out.println(aa);
     }
+
+    /**
+     * 自己写的日期工具类
+     */
+    @Test
+    public void test29() {
+        Date date = new Date();
+        Long result = date.getTime();
+        System.out.println(result);
+    }
+
+    /**
+     * 测试excel
+     */
+    @Test
+    public void test30() {
+        return;
+    }
+
 
 }

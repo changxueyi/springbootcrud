@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cxy.dao.DeptMapper">
+    <select id="queryAllDept" resultType="com.cxy.domin.Dept">
+        select * from dept
+    </select>
+
+    <insert id="addDept" parameterType="com.cxy.domin.Dept">
+        insert into dept values (#{deptNo},#{deptName},#{localtion})
+    </insert>
+</mapper>
