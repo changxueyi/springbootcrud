@@ -76,12 +76,13 @@ class SpringbootcrudApplicationTests {
     @Test
     public void test03() {
         User user = new User();
-        user.setId(12);
+        user.setId(4);
         user.setAge("1");
-        user.setName("京东数字科技");
+        user.setName("京东数字科技_全渠道_门店4");
         Calendar c = Calendar.getInstance();
-        //c.add(Calendar.SECOND,-3600);
-        user.setBirthday(c.getTime());
+        c.add(Calendar.SECOND,-3600);
+        //user.setBirthday(c.getTime());
+        //user.setBirthday(new Date());
         Integer result = userMapper.insert(user);
         System.out.println(result);
     }

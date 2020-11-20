@@ -7,7 +7,7 @@
   </insert>-->
 
     <insert id="insert" parameterType="com.cxy.domin.User">
-        insert into user values (#{id},#{name},#{age},#{birthday})
+        insert into user3 values (#{id},#{name},#{age},#{birthday})
     </insert>
 
     <insert id="insert2" parameterType="com.cxy.domin.User">
