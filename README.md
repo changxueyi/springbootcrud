@@ -23,3 +23,6 @@ redisTemplate.opsForZSet();
 
 如果操作字符串的话，建议用 StringRedisTemplate 。
 
+文章中使用的ES
+https://www.jianshu.com/p/bd2da1cde6f5?utm_campaign=maleskine&utm_content=note&utm_medium=reader_share&utm_source=weixin
+
